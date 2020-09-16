@@ -3,7 +3,7 @@ This repository contains the supplement material for "Gemini: A Grammar of Anima
 
 
 ## Content
-- implementaion : The prototype of Gemini including examples and stimuli we used for our formative study and evaluatoin study.
+- implementaion : The prototype of Gemini including examples and stimuli we used for our formative study and evaluatoin study. The latestt version of Gemini is available [here](https://github.com/uwdata/gemini)
 - prelim_study: The responses and stimuli of the preliminary study.
 - formative_study: The responses and analysis of the formative study.
 - evaluation_study: The d3 codes that we provided to the subjects (`evaluation_study/stimuli`), and the web page of the experiment result.
