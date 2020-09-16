@@ -1,5 +1,5 @@
 # Gemini: A Grammar of Animated Transitions in Statistical Graphics
-This repository contains the supplement material for "Gemini: A Grammar of Animated Transitions in Statistical Graphics", submitted to InfoVis 2020.
+This repository contains the supplemental material for "Gemini: A Grammar of Animated Transitions in Statistical Graphics", submitted to InfoVis 2020.
 
 
 ## Content
