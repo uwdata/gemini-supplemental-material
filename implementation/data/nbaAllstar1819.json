@@ -1,0 +1,497 @@
+[
+ {
+   "Position": "G",
+   "Player": "Kemba Walker",
+   "Team": "Charlotte Hornets",
+   "No. of selections": 3,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Kyrie Irving",
+   "Team": "Boston Celtics",
+   "No. of selections": 6,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Kawhi Leonard",
+   "Team": "Toronto Raptors",
+   "No. of selections": 3,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Giannis Antetokounmpo",
+   "Team": "Milwaukee Bucks",
+   "No. of selections": 3,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "C",
+   "Player": "Joel Embiid",
+   "Team": "Philadelphia 76ers",
+   "No. of selections": 2,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Kyle Lowry",
+   "Team": "Toronto Raptors",
+   "No. of selections": 5,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Victor Oladipo",
+   "Team": "Indiana Pacers",
+   "No. of selections": 2,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Khris Middleton",
+   "Team": "Milwaukee Bucks",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Bradley Beal",
+   "Team": "Washington Wizards",
+   "No. of selections": 2,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Ben Simmons",
+   "Team": "Philadelphia 76ers",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Blake Griffin",
+   "Team": "Detroit Pistons",
+   "No. of selections": 6,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "C",
+   "Player": "Nikola Vučević",
+   "Team": "Orlando Magic",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Dwyane Wade",
+   "Team": "Miami Heat",
+   "No. of selections": 13,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "D'Angelo Russell",
+   "Team": "Brooklyn Nets",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Stephen Curry",
+   "Team": "Golden State Warriors",
+   "No. of selections": 6,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "James Harden",
+   "Team": "Houston Rockets",
+   "No. of selections": 7,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Kevin Durant",
+   "Team": "Golden State Warriors",
+   "No. of selections": 10,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Paul George",
+   "Team": "Oklahoma City Thunder",
+   "No. of selections": 6,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "LeBron James",
+   "Team": "Los Angeles Lakers",
+   "No. of selections": 15,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Russell Westbrook",
+   "Team": "Oklahoma City Thunder",
+   "No. of selections": 8,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Damian Lillard",
+   "Team": "Portland Trail Blazers",
+   "No. of selections": 4,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Klay Thompson",
+   "Team": "Golden State Warriors",
+   "No. of selections": 5,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Anthony Davis",
+   "Team": "New Orleans Pelicans",
+   "No. of selections": 6,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "LaMarcus Aldridge",
+   "Team": "San Antonio Spurs",
+   "No. of selections": 7,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "C",
+   "Player": "Nikola Jokić",
+   "Team": "Denver Nuggets",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "C",
+   "Player": "Karl-Anthony Towns",
+   "Team": "Minnesota Timberwolves",
+   "No. of selections": 2,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "F",
+   "Player": "Dirk Nowitzki",
+   "Team": "Dallas Mavericks",
+   "No. of selections": 14,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2019
+ },
+ {
+   "Position": "G",
+   "Player": "Kyrie Irving",
+   "Team": "Boston Celtics",
+   "No. of selections": 5,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "DeMar DeRozan",
+   "Team": "Toronto Raptors",
+   "No. of selections": 4,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "F",
+   "Player": "LeBron James",
+   "Team": "Cleveland Cavaliers",
+   "No. of selections": 14,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "C",
+   "Player": "Joel Embiid",
+   "Team": "Philadelphia 76ers",
+   "No. of selections": 1,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "F/G",
+   "Player": "Giannis Antetokounmpo",
+   "Team": "Milwaukee Bucks",
+   "No. of selections": 2,
+   "Starter": true,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Bradley Beal",
+   "Team": "Washington Wizards",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Goran Dragić",
+   "Team": "Miami Heat",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "C/F",
+   "Player": "Al Horford",
+   "Team": "Boston Celtics",
+   "No. of selections": 5,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "F/C",
+   "Player": "Kevin Love",
+   "Team": "Cleveland Cavaliers",
+   "No. of selections": 5,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Kyle Lowry",
+   "Team": "Toronto Raptors",
+   "No. of selections": 4,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Victor Oladipo",
+   "Team": "Indiana Pacers",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "F/C",
+   "Player": "Kristaps Porziņģis",
+   "Team": "New York Knicks",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "John Wall",
+   "Team": "Washington Wizards",
+   "No. of selections": 5,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "C",
+   "Player": "Andre Drummond",
+   "Team": "Detroit Pistons",
+   "No. of selections": 2,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Kemba Walker",
+   "Team": "Charlotte Hornets",
+   "No. of selections": 2,
+   "Starter": false,
+   "Conference": "Eastern",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Stephen Curry",
+   "Team": "Golden State Warriors",
+   "No. of selections": 5,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "James Harden",
+   "Team": "Houston Rockets",
+   "No. of selections": 6,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "F",
+   "Player": "Kevin Durant",
+   "Team": "Golden State Warriors",
+   "No. of selections": 9,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "C",
+   "Player": "DeMarcus Cousins",
+   "Team": "New Orleans Pelicans",
+   "No. of selections": 4,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "F/C",
+   "Player": "Anthony Davis",
+   "Team": "New Orleans Pelicans",
+   "No. of selections": 5,
+   "Starter": true,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Russell Westbrook",
+   "Team": "Oklahoma City Thunder",
+   "No. of selections": 7,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Damian Lillard",
+   "Team": "Portland Trail Blazers",
+   "No. of selections": 3,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "F",
+   "Player": "Draymond Green",
+   "Team": "Golden State Warriors",
+   "No. of selections": 3,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "C",
+   "Player": "Karl-Anthony Towns",
+   "Team": "Minnesota Timberwolves",
+   "No. of selections": 1,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "F/C",
+   "Player": "LaMarcus Aldridge",
+   "Team": "San Antonio Spurs",
+   "No. of selections": 6,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "G",
+   "Player": "Klay Thompson",
+   "Team": "Golden State Warriors",
+   "No. of selections": 4,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "G/F",
+   "Player": "Jimmy Butler",
+   "Team": "Minnesota Timberwolves",
+   "No. of selections": 4,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ },
+ {
+   "Position": "F",
+   "Player": "Paul George",
+   "Team": "Oklahoma City Thunder",
+   "No. of selections": 5,
+   "Starter": false,
+   "Conference": "Western",
+   "Year": 2018
+ }
+]

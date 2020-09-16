@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style> /* set the CSS */
+
+  .title {
+    font-family: sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .legend .label {
+    font-family: sans-serif;
+    font-size: 10px;
+  }
+  .legend .point {
+    opacity: 0.7;
+    fill: transparent;
+    stroke-width: 1.5px;
+  }
+  .point {
+    opacity: 0.7;
+    fill: transparent;
+    stroke-width: 2px;
+  }
+
+  .domain {
+    stroke: rgb(136, 136, 136)
+  }
+  .tick line {
+    stroke: rgb(136, 136, 136)
+  }
+
+  .grid .tick line{
+    fill: none;
+    stroke: rgb(221, 221, 221);
+    stroke-width: 1px;
+  }
+  .grid .domain{
+    stroke: none;
+  }
+  </style>
+</head>
+
+<body>
+
+</script>
+</body>
+
+
+<body>
+  <div id="view"></div>
+
+  <button onclick="updateChart()">
+    update
+  </button>
+
+  <script>
+    const margin = { top: 20, right: 100, bottom: 40, left: 50 };
+    const width = 200, height = 200, radius = 2.75;
+
+    const svg = d3
+      .select("body")
+     .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+     .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    d3.json("data.json").then(data => {
+      // data
+      const location = d => (d.in_sf ? "San Francisco" : "New York");
+
+      // scales
+      const x = d3.scaleLinear().range([0, width]);
+      const sqftExtent = d3.extent(data, d => d.sqft);
+      x.domain([Math.min(sqftExtent[0], 0), sqftExtent[1]]).nice();
+
+      const y = d3.scaleLinear().range([height, 0]);
+      const pricePerSqftExtent = d3.extent(data, d => d.price_per_sqft);
+      y.domain([Math.min(pricePerSqftExtent[0], 0), pricePerSqftExtent[1]]).nice();
+
+      const color = d3.scaleOrdinal(d3.schemeTableau10);
+      const locationExtent = [...new Set(data.map(d => location(d)))];
+      color.domain(locationExtent);
+
+
+      // X-axis
+      const xAxis = svg
+        .append("g")
+        .attr("class", "xAxis")
+        .attr("transform", `translate(0,${height})`);
+
+      xAxis
+        .append("g")
+        .attr("class", "grid x")
+        .call(
+          d3.axisBottom(x)
+            .ticks(4)
+            .tickSize(-height)
+            .tickFormat("")
+        )
+        .call(g => g.select(".domain").remove());
+
+      xAxis
+        .append("g")
+        .attr("class", "axis")
+        .call(d3.axisBottom(x).ticks(4));
+
+      const xAxisTitleTransform = `translate(${width / 2}, ${margin.top + 16})`;
+
+      xAxis
+        .append("text")
+        .attr("class", "title")
+        .attr("transform", xAxisTitleTransform)
+        .attr("text-anchor", "middle")
+        .text("Square Foot");
+
+
+      // Y-axis
+      const yAxis = svg
+        .append("g")
+        .attr("class", "yAxis");
+
+      yAxis
+        .append("g")
+        .attr("class", "grid y")
+        .call(
+          d3.axisLeft(y)
+            .ticks(4)
+            .tickSize(-width)
+            .tickFormat("")
+        )
+        .call(g => g.select(".domain").remove());
+
+      yAxis
+        .append("g")
+        .attr("class", "axis")
+        .call(d3.axisLeft(y).ticks(4));
+
+
+      yAxis
+        .append("text")
+        .attr("class", "title")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x", 0 - height / 2)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Price / Square Foot");
+
+
+
+      // Legend
+      const legendOffset = 18;
+      const legend = svg
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(${width + legendOffset}, ${0})`);
+
+      legend
+        .append("text")
+        .attr("class", "title")
+        .text("Location");
+
+      const legendPairs = legend
+        .append("g")
+        .attr("class", "paris")
+        .selectAll(".pair")
+        .data(locationExtent)
+        .enter()
+        .append("g")
+        .attr("class", "pair")
+        .attr("transform", (d,i) => `translate(0, ${i*16 + 16})`)
+
+      legendPairs
+        .append("circle")
+        .attr("class", "point")
+        .attr("r", radius)
+        .attr("cx", d => 8)
+
+        .attr("r", 5)
+        .style("stroke", d => color(d));
+
+      legendPairs
+        .append("text")
+        .attr("class", "label")
+        .attr("dy", "1em")
+        .attr("transform", `translate(${18}, -7)`)
+        .text(d => d);
+
+      // Marks
+      const marks = svg
+        .append("g")
+        .attr("class", "marks")
+      const points = marks
+        .selectAll(".point")
+        .data(data)
+        .enter()
+       .append("circle")
+        .attr("class", "point")
+        .attr("cx", d => x(d.sqft))
+        .attr("cy", d => y(d.price_per_sqft))
+        .attr("r", radius)
+        .style("stroke", d => color(location(d)));
+
+
+        function updateChart() {
+            // Select all the points and then filter out the ones where beds > 2
+            points
+              .filter(d => d.beds > 2)
+              .transition()
+              .style('opacity', 0)
+              // .duration()
+              .delay((d, i) => i * 10)
+
+            const filteredData = data.filter(d => d.beds <= 2);
+            setTimeout(() => {
+              // scales
+              const sqftExtent = d3.extent(filteredData, d => d.sqft);
+              x.domain([Math.min(sqftExtent[0], 0), sqftExtent[1]]).nice();
+              const pricePerSqftExtent = d3.extent(filteredData, d => d.price_per_sqft);
+              y.domain([Math.min(pricePerSqftExtent[0], 0), pricePerSqftExtent[1]]).nice();
+
+              // Update circles
+              svg.selectAll("circle.point")
+                  .transition()
+                  .duration(1000)
+                  .attr("cx", d => x(d.sqft))
+                  .attr("cy", d => y(d.price_per_sqft))
+
+              svg.select(".xAxis .axis")
+                  .transition()
+                  .duration(1000)
+                  .call(d3.axisBottom(x).ticks(4));
+              svg.select(".xAxis .grid")
+                  .transition()
+                  .duration(1000)
+                  .call(
+                    d3.axisBottom(x)
+                      .ticks(4)
+                      .tickSize(-height)
+                      .tickFormat(""));
+
+              // // Update Y Axis
+              svg.select(".yAxis .axis")
+                  .transition()
+                  .duration(1000)
+                  .call(d3.axisLeft(y).ticks(4));
+
+              svg.select(".yAxis .grid")
+                .transition()
+                .duration(1000)
+                .call(
+                  d3.axisLeft(y)
+                    .ticks(4)
+                    .tickSize(-width)
+                    .tickFormat(""));
+
+
+            }, 2000)
+
+
+          }
+
+        window.updateChart = updateChart
+    });
+
+  </script>
+</body>

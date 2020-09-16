@@ -1,0 +1,660 @@
+{
+  "title": "[Exp Stimulus]Sorting & Updating Bars",
+  "etc": "(Order & Data Schema Change)",
+  "displayHeight": 300,
+  "description": "The two charts represent the top 7 most-viewed Youtube clips. The start chart changes to the end chart that shows how long the clips have been published.",
+  "sSpec": {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "A simple bar chart with embedded data.",
+    "background": "white",
+    "padding": 5,
+    "height": 160,
+    "style": "cell",
+    "data": [
+      {
+        "name": "source_0",
+        "values": [
+          {
+            "title": "Despacito",
+            "author": "Luis Fonsi featuring Daddy Yankee",
+            "views": 6.61,
+            "published": "January 12, 2017"
+          },
+          {
+            "title": "Shape of You",
+            "author": "Ed Sheeran",
+            "views": 4.58,
+            "published": "January 30, 2017"
+          },
+          {
+            "title": "Baby Shark Dance",
+            "author": "Pinkfong Kids' Songs & Stories",
+            "views": 4.4,
+            "published": "June 17, 2016"
+          },
+          {
+            "title": "See You Again",
+            "author": "Wiz Khalifa featuring Charlie Puth",
+            "views": 4.38,
+            "published": "April 6, 2015"
+          },
+          {
+            "title": "Recipe for Disaster",
+            "author": "Get Movies",
+            "views": 4.22,
+            "published": "January 31, 2012"
+          },
+          {
+            "title": "Uptown Funk",
+            "author": "Mark Ronson featuring Bruno Mars",
+            "views": 3.76,
+            "published": "November 19, 2014"
+          },
+          {
+            "title": "Gangnam Style",
+            "author": "Psy",
+            "views": 3.5,
+            "published": "July 15, 2012"
+          }
+        ]
+      },
+      {
+        "name": "data_0",
+        "source": "source_0",
+        "transform": [
+          {
+            "type": "formula",
+            "expr": "(year('2020-01-01') - year(datum.published)) + (month('2020-01-01') - month(datum.published))/12",
+            "as": "years"
+          }
+        ]
+      },
+      {
+        "name": "data_1",
+        "source": "data_0",
+        "transform": [
+          {
+            "type": "filter",
+            "expr": "isValid(datum[\"views\"]) && isFinite(+datum[\"views\"])"
+          }
+        ]
+      }
+    ],
+    "signals": [
+      {"name": "x_step", "value": 20},
+      {
+        "name": "width",
+        "update": "bandspace(domain('x').length, 0.1, 0.05) * x_step"
+      }
+    ],
+    "marks": [
+      {
+        "name": "marks",
+        "type": "rect",
+        "style": ["bar"],
+        "from": {"data": "data_1"},
+        "encode": {
+          "update": {
+            "fill": {"value": "#4c78a8"},
+            "x": {"scale": "x", "field": "title"},
+            "width": {"scale": "x", "band": true},
+            "y": {"scale": "y", "field": "views"},
+            "y2": {"scale": "y", "value": 0}
+          }
+        }
+      }
+    ],
+    "scales": [
+      {
+        "name": "x",
+        "type": "band",
+        "domain": {
+          "data": "data_0",
+          "field": "title",
+          "sort": {"op": "average", "field": "views", "order": "descending"}
+        },
+        "range": {"step": {"signal": "x_step"}},
+        "paddingInner": 0.1,
+        "paddingOuter": 0.05
+      },
+      {
+        "name": "y",
+        "type": "linear",
+        "domain": {"data": "data_1", "field": "views"},
+        "range": [{"signal": "height"}, 0],
+        "nice": true,
+        "zero": true
+      }
+    ],
+    "axes": [
+      {
+        "scale": "y",
+        "orient": "left",
+        "grid": true,
+        "title": "Views (billion)",
+        "format": ".1f",
+        "labelOverlap": true,
+        "tickCount": {"signal": "ceil(height/40)"},
+        "zindex": 0,
+        "gridScale": "x",
+        "encode": {"axis": {"name": "y"}}
+      },
+      {
+        "scale": "x",
+        "orient": "bottom",
+        "grid": false,
+        "title": "Clip",
+        "labelAngle": 45,
+        "labelAlign": "left",
+        "labelBaseline": "top",
+        "zindex": 0,
+        "encode": {"axis": {"name": "x"}}
+      }
+    ]
+  },
+  "eSpec": {
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "A simple bar chart with embedded data.",
+    "background": "white",
+    "padding": 5,
+    "height": 160,
+    "style": "cell",
+    "data": [
+      {
+        "name": "source_0",
+        "values": [
+          {
+            "title": "Despacito",
+            "author": "Luis Fonsi featuring Daddy Yankee",
+            "views": 6.61,
+            "published": "January 12, 2017"
+          },
+          {
+            "title": "Shape of You",
+            "author": "Ed Sheeran",
+            "views": 4.58,
+            "published": "January 30, 2017"
+          },
+          {
+            "title": "Baby Shark Dance",
+            "author": "Pinkfong Kids' Songs & Stories",
+            "views": 4.4,
+            "published": "June 17, 2016"
+          },
+          {
+            "title": "See You Again",
+            "author": "Wiz Khalifa featuring Charlie Puth",
+            "views": 4.38,
+            "published": "April 6, 2015"
+          },
+          {
+            "title": "Recipe for Disaster",
+            "author": "Get Movies",
+            "views": 4.22,
+            "published": "January 31, 2012"
+          },
+          {
+            "title": "Uptown Funk",
+            "author": "Mark Ronson featuring Bruno Mars",
+            "views": 3.76,
+            "published": "November 19, 2014"
+          },
+          {
+            "title": "Gangnam Style",
+            "author": "Psy",
+            "views": 3.5,
+            "published": "July 15, 2012"
+          }
+        ]
+      },
+      {
+        "name": "data_0",
+        "source": "source_0",
+        "transform": [
+          {
+            "type": "formula",
+            "expr": "(year('2020-01-01') - year(datum.published)) + (month('2020-01-01') - month(datum.published))/12",
+            "as": "years"
+          }
+        ]
+      },
+      {
+        "name": "data_1",
+        "source": "data_0",
+        "transform": [
+          {
+            "type": "filter",
+            "expr": "isValid(datum[\"years\"]) && isFinite(+datum[\"years\"])"
+          }
+        ]
+      }
+    ],
+    "signals": [
+      {"name": "x_step", "value": 20},
+      {
+        "name": "width",
+        "update": "bandspace(domain('x').length, 0.1, 0.05) * x_step"
+      }
+    ],
+    "marks": [
+      {
+        "name": "marks",
+        "type": "rect",
+        "style": ["bar"],
+        "from": {"data": "data_1"},
+        "encode": {
+          "update": {
+            "fill": {"value": "#4c78a8"},
+            "x": {"scale": "x", "field": "title"},
+            "width": {"scale": "x", "band": true},
+            "y": {"scale": "y", "field": "years"},
+            "y2": {"scale": "y", "value": 0}
+          }
+        }
+      }
+    ],
+    "scales": [
+      {
+        "name": "x",
+        "type": "band",
+        "domain": {
+          "data": "data_0",
+          "field": "title",
+          "sort": {"op": "average", "field": "years", "order": "descending"}
+        },
+        "range": {"step": {"signal": "x_step"}},
+        "paddingInner": 0.1,
+        "paddingOuter": 0.05
+      },
+      {
+        "name": "y",
+        "type": "linear",
+        "domain": {"data": "data_1", "field": "years"},
+        "range": [{"signal": "height"}, 0],
+        "nice": true,
+        "zero": true
+      }
+    ],
+    "axes": [
+      {
+        "scale": "y",
+        "orient": "left",
+        "grid": true,
+        "title": "Posted For (year)",
+        "format": ".1f",
+        "labelOverlap": true,
+        "tickCount": {"signal": "ceil(height/40)"},
+        "zindex": 0,
+        "gridScale": "x",
+        "encode": {"axis": {"name": "y"}}
+      },
+      {
+        "scale": "x",
+        "orient": "bottom",
+        "grid": false,
+        "title": "Clip",
+        "labelAngle": 45,
+        "labelAlign": "left",
+        "labelBaseline": "top",
+        "zindex": 0,
+        "encode": {"axis": {"name": "x"}}
+      }
+    ]
+  },
+  "gemSpecs": [
+    {
+      "timeline": {
+        "concat": [
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x", "y"],
+                  "encode": {"update": true, "enter": true, "exit": true}
+                },
+                "timing": {"duration": {"ratio": 1}}
+              },
+              {
+                "component": {"axis": "y"},
+                "change": {"scale": {"domainDimension": "diff"}},
+                "timing": {"duration": {"ratio": 1}}
+              },
+              {
+                "component": {"axis": "x"},
+                "change": {"scale": {"domainDimension": "same"}},
+                "timing": {"duration": {"ratio": 1}}
+              }
+            ]
+          }
+        ]
+      },
+      "totalDuration": 2000,
+      "meta": {"name": "s1r1"}
+    },
+    {
+      "timeline": {
+        "concat": [
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x"],
+                  "encode": {
+                    "update": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "enter": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "exit": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    }
+                  }
+                },
+                "timing": {"duration": {"ratio": 0.5}}
+              },
+              {
+                "component": {"axis": "x"},
+                "change": {"scale": {"domainDimension": "same"}},
+                "timing": {"duration": {"ratio": 0.5}}
+              }
+            ]
+          },
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x", "y"],
+                  "encode": {"update": true, "enter": true, "exit": true}
+                },
+                "timing": {"duration": {"ratio": 0.5}}
+              },
+              {
+                "component": {"axis": "y"},
+                "change": {"scale": {"domainDimension": "diff"}},
+                "timing": {"duration": {"ratio": 0.5}}
+              }
+            ]
+          }
+        ]
+      },
+      "totalDuration": 2000,
+      "meta": {"name": "s2r1"}
+    },
+    {
+      "timeline": {
+        "concat": [
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x", "y"],
+                  "encode": {
+                    "update": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "enter": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "exit": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    }
+                  }
+                },
+                "timing": {"duration": {"ratio": 0.5}}
+              },
+              {
+                "component": {"axis": "y"},
+                "change": {"scale": {"domainDimension": "diff"}},
+                "timing": {"duration": {"ratio": 0.5}}
+              },
+              {
+                "component": {"axis": "x"},
+                "change": {"scale": {"domainDimension": "same"}},
+                "timing": {"duration": {"ratio": 0.5}}
+              }
+            ]
+          },
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x", "y"],
+                  "encode": {"update": true, "enter": true, "exit": true}
+                },
+                "timing": {"duration": {"ratio": 0.5}}
+              }
+            ]
+          }
+        ]
+      },
+      "totalDuration": 2000,
+      "meta": {"name": "s2r2"}
+    },
+    {
+      "timeline": {
+        "concat": [
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["y"],
+                  "encode": {
+                    "update": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "enter": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "exit": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    }
+                  }
+                },
+                "timing": {"duration": {"ratio": 0.5}}
+              },
+              {
+                "component": {"axis": "x"},
+                "change": {"scale": {"domainDimension": "same"}},
+                "timing": {"duration": {"ratio": 0.5}}
+              }
+            ]
+          },
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x", "y"],
+                  "encode": {"update": true, "enter": true, "exit": true}
+                },
+                "timing": {"duration": {"ratio": 0.5}}
+              },
+              {
+                "component": {"axis": "y"},
+                "change": {"scale": {"domainDimension": "diff"}},
+                "timing": {"duration": {"ratio": 0.5}}
+              }
+            ]
+          }
+        ]
+      },
+      "totalDuration": 2000,
+      "meta": {"name": "s2r3"}
+    },
+    {
+      "timeline": {
+        "concat": [
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x"],
+                  "encode": {
+                    "update": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "enter": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    },
+                    "exit": {
+                      "y": false,
+                      "y2": false,
+                      "yc": false,
+                      "height": false
+                    }
+                  }
+                },
+                "timing": {"duration": {"ratio": 0.33}}
+              }
+            ]
+          },
+          {
+            "sync": [
+              {
+                "component": {"mark": "marks"},
+                "change": {
+                  "scale": ["x", "y"],
+                  "encode": {"update": true, "enter": true, "exit": true}
+                },
+                "timing": {"duration": {"ratio": 0.33}}
+              },
+              {
+                "component": {"axis": "y"},
+                "change": {"scale": {"domainDimension": "diff"}},
+                "timing": {"duration": {"ratio": 0.33}}
+              }
+            ]
+          },
+          {
+            "sync": [
+              {
+                "component": {"axis": "x"},
+                "change": {"scale": {"domainDimension": "same"}},
+                "timing": {"duration": {"ratio": 0.33}}
+              }
+            ]
+          }
+        ]
+      },
+      "totalDuration": 2000,
+      "meta": {"name": "s3r1"}
+    }
+  ],
+  "vlSpec": {
+    "height": 160,
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "description": "A simple bar chart with embedded data.",
+    "data": {
+      "values": [
+        {
+          "title": "Despacito",
+          "author": "Luis Fonsi featuring Daddy Yankee",
+          "views": 6.61,
+          "published": "January 12, 2017"
+        },
+        {
+          "title": "Shape of You",
+          "author": "Ed Sheeran",
+          "views": 4.58,
+          "published": "January 30, 2017"
+        },
+        {
+          "title": "Baby Shark Dance",
+          "author": "Pinkfong Kids' Songs & Stories",
+          "views": 4.4,
+          "published": "June 17, 2016"
+        },
+        {
+          "title": "See You Again",
+          "author": "Wiz Khalifa featuring Charlie Puth",
+          "views": 4.38,
+          "published": "April 6, 2015"
+        },
+        {
+          "title": "Recipe for Disaster",
+          "author": "Get Movies",
+          "views": 4.22,
+          "published": "January 31, 2012"
+        },
+        {
+          "title": "Uptown Funk",
+          "author": "Mark Ronson featuring Bruno Mars",
+          "views": 3.76,
+          "published": "November 19, 2014"
+        },
+        {
+          "title": "Gangnam Style",
+          "author": "Psy",
+          "views": 3.5,
+          "published": "July 15, 2012"
+        }
+      ]
+    },
+    "mark": "bar",
+    "transform": [
+      {
+        "calculate": "(year('2020-01-01') - year(datum.published)) + (month('2020-01-01') - month(datum.published))/12",
+        "as": "years"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "title",
+        "type": "nominal",
+        "sort": {"field": "years", "op": "average", "order": "descending"},
+        "axis": {"labelAngle": 45, "title": "Clip"}
+      },
+      "y": {
+        "field": "years",
+        "type": "quantitative",
+        "title": "Posted For (year)",
+        "axis": {"format": ".1f"}
+      }
+    }
+  },
+  "userInput": {
+    "marks": {"marks": {"change": {"data": ["title"]}}},
+    "scales": {"x": {"domainDimension": "same"}, "y": {"domainDimension": "diff"}}
+  }
+}

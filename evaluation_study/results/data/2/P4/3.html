@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style> /* set the CSS */
+    .mark {
+      fill: steelblue;
+    }
+    .mark.line {
+      stroke-width: 2px;
+      fill: transparent;
+    }
+    .title {
+      font-family: sans-serif;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .legend .label {
+      font-family: sans-serif;
+      font-size: 10px;
+    }
+    .legend .point {
+      opacity: 0.7;
+      fill: transparent;
+      stroke-width: 1.5px;
+    }
+    .legend .line {
+      fill: transparent;
+      stroke-width: 2px;
+    }
+
+    .point {
+      opacity: 0.7;
+      fill: transparent;
+      stroke-width: 2px;
+    }
+
+    .domain {
+      stroke: rgb(136, 136, 136)
+    }
+    .tick line {
+      stroke: rgb(136, 136, 136)
+    }
+
+    .grid .tick line{
+      fill: none;
+      stroke: rgb(221, 221, 221);
+      stroke-width: 1px;
+    }
+    .grid .domain{
+      stroke: none;
+    }
+  </style>
+</head>
+
+<body>
+
+</script>
+</body>
+
+
+<body>
+  <button type="button" onclick="start_animation_step1()">Start</button>
+  <div id="view"></div>
+  <script>
+    const margin = { top: 20, right: 65, bottom: 40, left: 40 };
+
+  const height = 200;
+  const width = 200;
+  const svg = d3
+    .select("#view")
+    .append("svg")
+
+  svg.append('defs')
+    .append('clipPath')
+    .attr('id', 'clip')
+    .append('rect')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', width)
+      .attr('height', height);
+
+  const root = svg.append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  const view = document.getElementById("view")
+
+  var start_animation_step1, start_animation_step2;
+
+  d3.json("data.json").then(sourceData => {
+    // data
+    const data = sourceData.map(d => {
+      return { ...d, dateTime: new Date(d.date) };
+    }).filter(d => {
+      const year = new Date(d.date).getFullYear();
+      return year >= 2005 && year < 2006
+    }).sort((a,b) => a.dateTime - b.dateTime);
+
+    const data_mid = sourceData.map(d => {
+      return { ...d, dateTime: new Date(d.date) };
+    }).filter(d => {
+      const year = new Date(d.date).getFullYear();
+      const month = new Date(d.date).getMonth();
+      const day = new Date(d.date).getDay();
+      return year >= 2005 && year < 2007
+    }).sort((a,b) => a.dateTime - b.dateTime);
+
+    const data_end = sourceData.map(d => {
+      return { ...d, dateTime: new Date(d.date) };
+    }).filter(d => {
+      const year = new Date(d.date).getFullYear();
+      return year >= 2005 && year < 2008
+    }).sort((a,b) => a.dateTime - b.dateTime);
+
+    svg.attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+
+    // scales
+    const x = d3.scaleTime().range([0, width]);
+    const dateTimeExtent = d3.extent(data, d => d.dateTime);
+    x.domain([dateTimeExtent[0], dateTimeExtent[1]]);
+
+    const y = d3.scaleLinear().range([height, 0]);
+    const priceExtent = d3.extent(data, d => d.price);
+    y.domain([Math.min(priceExtent[0], 0), priceExtent[1]]).nice();
+
+    const color = d3.scaleOrdinal(d3.schemeTableau10);
+    const symbols = [...new Set (data.map(d => d.symbol))].sort();
+    color.domain(symbols.sort());
+
+    const xAxisBottom = d3.axisBottom(x).ticks(4);
+    const yAxisLeft = d3.axisLeft(y).ticks(4);
+
+    // x axis
+    const xAxis = root.append("g")
+      .attr("class", "xAxis");
+
+    const xAxisGrid = xAxis.append("g")
+      .attr("class", `grid x`)
+      .call(d3.axisBottom(x).ticks(4).tickSize(height).tickFormat(""))
+      .call(g => g.select(".domain").remove());
+
+    const xAxisElements = xAxis.append("g").attr("class", `xAxis`)
+      .attr("transform", `translate(0,${height})`)
+      .call(xAxisBottom);
+
+    xAxis.append("text")
+      .attr("class", "title")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + margin.bottom - 25})`)
+      .text("Date")
+
+    // y axis
+    const yAxis = root.append("g")
+      .attr("class", "yAxis");
+
+    const yAxisGrid = yAxis.append("g")
+      .attr("class", `grid y`)
+      .call(d3.axisLeft(y).ticks(4).tickSize(-width).tickFormat(""))
+      .call(g => g.select(".domain").remove());
+
+    const yAxisElements = yAxis.append("g")
+      .attr("class", `axis`)
+      .call(yAxisLeft);
+
+    yAxis
+      .append("text")
+      .attr("class", "title")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - height / 2)
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Price");
+
+    // Legend
+    const legendOffset = 18;
+    const legend = root
+      .append("g")
+      .attr("class", "legend")
+      .attr("transform", `translate(${width + legendOffset}, ${0})`);
+
+    legend
+      .append("text")
+      .attr("class", "title")
+      .text("Symbol");
+
+    const legendPairs = legend
+      .append("g")
+      .attr("class", "paris")
+      .selectAll(".pair")
+      .data(symbols)
+      .enter()
+      .append("g")
+      .attr("class", "pair")
+      .attr("transform", (d,i) => `translate(0, ${i*16 + 16})`)
+
+    legendPairs
+      .append("line")
+      .attr("class", "line")
+      .attr("x0", 0)
+      .attr("x1", 10)
+      .style("stroke", d => color(d));
+
+    legendPairs
+      .append("text")
+      .attr("class", "label")
+      .attr("dy", "1em")
+      .attr("transform", `translate(${14}, -7)`)
+      .text(d => d);
+
+
+    // marks
+    const line = d3.line()
+      .x(d => x(d.dateTime))
+      .y(d => y(d.price))
+
+    const groupedData = d3.nest()
+      .key(d => d.symbol)
+      .entries(data);
+
+    const groupedData_end = d3.nest()
+        .key(d => d.symbol)
+        .entries(data_end);
+
+    const marks = root.append("g")
+      .attr("class", "marks")
+      .attr('clip-path', 'url(#clip)')
+
+    const lines = marks.selectAll(".mark")
+      .data(groupedData_end, d => d.key).enter()
+      .append("path")
+      .attr("class", "mark line")
+      .attr("d", d => line(d.values))
+      .attr("stroke", d => color(d.key))
+
+
+
+    // Animation
+    const animation_time_step1 = 1250;
+    const animation_time_step2 = 1750;
+
+    start_animation_step1 = function() {
+
+      // Update the x extent
+      const dateTimeExtent_End = d3.extent(data_mid, d => d.dateTime);
+      x.domain([dateTimeExtent_End[0], dateTimeExtent_End[1]]);
+
+      // Update the x axis
+      xAxisElements.transition()
+        .ease(d3.easeSinIn)
+        .duration(animation_time_step1)
+        .call(xAxisBottom);
+
+      // Update the x axis grid
+      xAxisGrid.transition()
+        .ease(d3.easeSinIn)
+        .duration(animation_time_step1)
+        .call(d3.axisBottom(x).ticks(4).tickSize(height).tickFormat(""))
+
+      d3.selectAll(".mark")
+        .transition()
+          .ease(d3.easeSinIn)
+          .duration(animation_time_step1)
+          .attr("d", d => line(d.values))
+        .on("end", start_animation_step2)
+
+    }
+
+    start_animation_step2 = function() {
+
+      // Update the x extent
+      const dateTimeExtent_End = d3.extent(data_end, d => d.dateTime);
+      x.domain([dateTimeExtent_End[0], dateTimeExtent_End[1]]);
+
+      // Update the x axis
+      xAxisElements.transition()
+        .ease(d3.easeSinOut)
+        .duration(animation_time_step2)
+        .call(xAxisBottom);
+
+      // Update the x axis grid
+      xAxisGrid.transition()
+        .ease(d3.easeSinOut)
+        .duration(animation_time_step2)
+        .call(d3.axisBottom(x).ticks(4).tickSize(height).tickFormat(""))
+
+      // Update the y extent
+      const priceExtent_End = d3.extent(data_end, d => d.price);
+      y.domain([Math.min(priceExtent_End[0], 0), priceExtent_End[1]]).nice();
+
+      // Update the y axis
+      yAxisElements.transition()
+        .ease(d3.easeSinOut)
+        .duration(animation_time_step2)
+        .call(yAxisLeft)
+
+      // Update the y axis grid
+      yAxisGrid.transition()
+        .ease(d3.easeSinOut)
+        .duration(animation_time_step2)
+        .call(d3.axisLeft(y).ticks(4).tickSize(-width).tickFormat(""))
+
+      d3.selectAll(".mark")
+        .transition()
+          .ease(d3.easeSinOut)
+          .duration(animation_time_step2)
+          .attr("d", d => line(d.values))
+    }
+
+
+
+  })
+  </script>
+</body>
